@@ -19,13 +19,13 @@ unsigned char tmpA;
 
 void tick()
 {
-	tmpA = PINA & 0x03;
+	tmpA = (~PINA) & 0x03;
 	switch(state){
 		case start:
 			state = WAITRISE;
 			break;
 		case WAITRISE:
-			if((PINA & 0X03) == 0)
+			if(tmpA == 0)
 				state = WAITRISE;
 			else if(tmpA == 1)
 				state = INC;
@@ -84,7 +84,7 @@ void tick()
 
 int main(void) {
     /* Insert DDR and PORT initializations */
-	DDRA = 0x00; PORTA = 0x00; // Configure port A's 8 pins as inputs
+	DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
 	DDRC = 0xFF; PORTC = 0x00; // Configure port B's 8 pins as inputs
     /* Insert your solution below */
 	state = start;   
