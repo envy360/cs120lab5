@@ -14,8 +14,8 @@
 
 int main(void) {
     /* Insert DDR and PORT initializations */
-	DDRA = 0x00; PORTA = 0x00; // Configure port A's 8 pins as inputs
-	DDRC = 0x00; PORTC = 0x00; // Configure port C's 8 pins as outputs
+	DDRA = 0x00; PORTA = 0xFF; // Configure port A's 8 pins as inputs
+	DDRC = 0xFF; PORTC = 0x00; // Configure port C's 8 pins as outputs
 
 	unsigned char tempc = 0x00; // Temporary variable to hold the total weight
 	unsigned char tempa = 0x00; // Temporary variable to hold the total weight
@@ -23,7 +23,7 @@ int main(void) {
     /* Insert your solution below */
     while (1) {
 	tempc = 0x00;
-	tempa = PINA & 0x0F;
+	tempa = ~PINA & 0x0F;
 
 	if(tempa == 0)
 		tempc = 0;
